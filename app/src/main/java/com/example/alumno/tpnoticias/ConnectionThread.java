@@ -1,0 +1,48 @@
+package com.example.alumno.tpnoticias;
+
+import android.os.Handler;
+import android.os.Message;
+
+public class ConnectionThread extends Thread {
+    private Handler handler;
+    private String url;
+    private int textoImagen;
+    private int position;
+
+    public ConnectionThread(Handler handler, String url, int textoImagen) {
+        this.handler = handler;
+        this.url = url;
+        this.textoImagen = textoImagen;
+    }
+
+    public ConnectionThread(Handler handler, String url, int textoImagen, int position) {
+        this.handler = handler;
+        this.url = url;
+        this.textoImagen = textoImagen;
+        this.position = position;
+    }
+
+    @Override
+    public void run(){
+        if (textoImagen == MainActivity.NOTICIAS) {
+            UrlConnection connection = new UrlConnection(url);
+            String xml = connection.getStringRss();
+            Message mensaje = new Message();
+            XmlParser parser = new XmlParser();
+            mensaje.obj = parser.parserXml(xml);
+            mensaje.arg1 = MainActivity.NOTICIAS;
+            handler.sendMessage(mensaje);
+        }
+        else {
+            if (textoImagen == MainActivity.IMAGEN){
+                UrlConnection connection = new UrlConnection(url);
+                byte[] img = connection.getImagen();
+                Message mensaje = new Message();
+                mensaje.obj = img;
+                mensaje.arg1 = MainActivity.IMAGEN;
+                mensaje.arg2 = position;
+                handler.sendMessage(mensaje);
+            }
+        }
+    }
+}
