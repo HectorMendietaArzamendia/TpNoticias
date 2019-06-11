@@ -5,7 +5,8 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical"
-  tools:context="com.example.alumno.tpnoticias.MainActivity">
+  tools:context="com.example.alumno.tpnoticias.MainActivity"
+  android:background="#ECEBEB">
 
   <android.support.v7.widget.RecyclerView
       android:layout_width="match_parent"

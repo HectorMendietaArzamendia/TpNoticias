@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
     ActionBar ab = getSupportActionBar();
     ab.setTitle(getResources().getText(R.string.title));
 
+    /*  https://www.telam.com.ar/rss2/ultimasnoticias.xml
+        https://www.pagina12.com.ar/rss/portada
+        https://www.clarin.com/rss/lo-ultimo/
+        http://contenidos.lanacion.com.ar/herramientas/rss-origen=2 */
+
     Handler handler = new Handler(this);
     RecyclerView rv = (RecyclerView) findViewById(R.id.rvMain);
     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -39,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
     rv.setAdapter(adapter);
     ConnectionThread thread = new ConnectionThread(handler, "https://www.pagina12.com.ar/rss/portada", NOTICIAS);
     thread.start();
+    ConnectionThread thread2 = new ConnectionThread(handler, "https://www.clarin.com/rss/lo-ultimo/", NOTICIAS);
+    thread2.start();
   }
 
   @Override

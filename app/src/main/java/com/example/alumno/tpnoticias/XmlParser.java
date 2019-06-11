@@ -32,7 +32,11 @@ public class XmlParser {
                         if (noticia != null) noticia.setDescripcion(parser.nextText());
                     }
                     if ("link".equals(parser.getName())){
-                        if (noticia != null) noticia.setLink(parser.nextText());
+                        String link = parser.nextText();
+                        if (noticia != null && link != null){
+                            if (!link.contains("www.")){ noticia.setLink("http://www.telam.com.ar".concat(link)); }
+                            else { noticia.setLink(link);}
+                        }
                     }
                     if ("pubDate".equals(parser.getName())){
                         if (noticia != null) {

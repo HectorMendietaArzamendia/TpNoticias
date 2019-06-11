@@ -56,8 +56,8 @@ public class MyAdapter extends RecyclerView.Adapter <MyViewHolder>{
 
         String link = noticia.getLink();
         if (link != null){
-            if (link.length() > 40){
-                holder.tvLink.setText(link.substring(0, 40).concat("..."));
+            if (link.length() > 45){
+                holder.tvLink.setText(link.substring(0, 45).concat("..."));
             }
             else { holder.tvLink.setText(link); }
         }
