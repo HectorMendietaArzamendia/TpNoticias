@@ -2,7 +2,6 @@ package com.example.alumno.tpnoticias;
 
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 public class ConnectionThread extends Thread {
     private Handler handler;
@@ -26,7 +25,6 @@ public class ConnectionThread extends Thread {
     @Override
     public void run(){
         if (noticiasImagen == MainActivity.NOTICIAS) {
-            Log.d("URL", url);
             UrlConnection connection = new UrlConnection(url);
             String xml = connection.getStringRss();
             Message mensaje = new Message();

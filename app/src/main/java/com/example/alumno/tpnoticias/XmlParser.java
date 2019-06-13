@@ -6,7 +6,6 @@ import org.xmlpull.v1.XmlPullParser;
 
 import java.io.StringReader;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -22,33 +21,34 @@ public class XmlParser {
             int event = parser.getEventType();
             while (event != XmlPullParser.END_DOCUMENT){
                 if (event == XmlPullParser.START_TAG){
-                    if ("item".equals(parser.getName())){
+                    String tagName = parser.getName();
+                    if ("item".equals(tagName)){
                         noticia = new Noticia();
                     }
-                    if ("title".equals(parser.getName())){
+                    if ("title".equals(tagName)){
                         if (noticia != null) noticia.setTitulo(parser.nextText());
                     }
-                    if ("description".equals(parser.getName())){
+                    if ("description".equals(tagName)){
                         if (noticia != null) noticia.setDescripcion(parser.nextText());
                     }
-                    if ("link".equals(parser.getName())){
+                    if ("link".equals(tagName)){
                         String link = parser.nextText();
                         if (noticia != null && link != null){
-                            if (!link.contains("www.")){ noticia.setLink("http://www.telam.com.ar".concat(link)); }
+                            if (!link.contains("http")){ noticia.setLink("http://www.telam.com.ar".concat(link)); }
                             else { noticia.setLink(link);}
                         }
                     }
-                    if ("pubDate".equals(parser.getName())){
+                    if ("pubDate".equals(tagName)){
                         if (noticia != null) {
                             SimpleDateFormat dateFormat = new SimpleDateFormat("EE, d MMM yyyy HH:mm:ss z", Locale.US);
                             noticia.setFecha(dateFormat.parse(parser.nextText()));
                         }
                     }
-                    if ("enclosure".equals(parser.getName())){
+                    if ("enclosure".equals(tagName)){
                         if (noticia != null) noticia.setUrlImagen(parser.getAttributeValue(null, "url"));
                     }
-                    if ("img".equals(parser.getName())){ //infobae
-                        if ((noticia != null)) noticia.setUrlImagen(parser.getAttributeValue(null, "src"));
+                    if ("url".equals(tagName)){ //Cronica
+                        if (noticia != null) noticia.setUrlImagen(parser.nextText());
                     }
                 }
                 if (event == XmlPullParser.END_TAG){
