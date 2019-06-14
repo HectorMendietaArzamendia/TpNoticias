@@ -1,22 +1,30 @@
 package com.example.alumno.tpnoticias;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
+import android.view.View;
+import android.widget.CheckBox;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class MenuListener implements SearchView.OnQueryTextListener, DialogInterface.OnClickListener {
-    private IListener main;
+    private IListener mainListener;
     private List<Noticia> noticias;
     private List<Noticia> auxNoticias = new LinkedList<>();
 
     public MenuListener() {}
 
-    public MenuListener(IListener main, List<Noticia> noticias) {
-        this.main = main;
+    public MenuListener(IListener mainListener, List<Noticia> noticias) {
+        this.mainListener = mainListener;
         this.noticias = noticias;
+    }
+
+    public void setMainListener(IListener mainListener) {
+        this.mainListener = mainListener;
     }
 
     @Override
@@ -28,7 +36,7 @@ public class MenuListener implements SearchView.OnQueryTextListener, DialogInter
                 auxNoticias.add(n);
             }
         }
-        main.modificarLista(auxNoticias);
+        mainListener.modificarLista(auxNoticias);
         return false;
     }
 
@@ -42,7 +50,7 @@ public class MenuListener implements SearchView.OnQueryTextListener, DialogInter
                     auxNoticias.add(n);
                 }
             }
-            main.modificarLista(auxNoticias);
+            mainListener.modificarLista(auxNoticias);
         }
         return false;
     }
@@ -50,7 +58,13 @@ public class MenuListener implements SearchView.OnQueryTextListener, DialogInter
     @Override
     public void onClick(DialogInterface dialogInterface, int which) {
         if (which == AlertDialog.BUTTON_POSITIVE){
-           // MainActivity.actualizar("");
+            SharedPreferences.Editor editor = MainActivity.pref.edit();
+            for (View v: MainActivity.layout.getTouchables()){
+                CheckBox cb = (CheckBox) v;
+                editor.putBoolean(cb.getText().toString(), cb.isChecked());
+            }
+            editor.commit();
+            mainListener.actualizarVista();
         }
     }
 }

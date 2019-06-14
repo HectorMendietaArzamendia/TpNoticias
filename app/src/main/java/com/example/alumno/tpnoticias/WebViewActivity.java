@@ -1,15 +1,18 @@
 package com.example.alumno.tpnoticias;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 public class WebViewActivity extends AppCompatActivity {
+    private static String url = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,25 @@ public class WebViewActivity extends AppCompatActivity {
         WebSettings ws = wv.getSettings();
         ws.setJavaScriptEnabled(true);
         wv.setWebViewClient(new WebViewClient());
-        wv.loadUrl(i.getStringExtra("url"));
+        url = i.getStringExtra("url");
+        wv.loadUrl(url);
+
+
+        FloatingActionButton compartir = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        compartir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                myIntent.putExtra(Intent.EXTRA_TEXT,url);
+                String shareBody ="body";
+                String shareSub = "sub";
+                //  startActivity(Intent.createChooser(myIntent),"Compartir Usando");
+                startActivity(myIntent);
+            }
+        });
+
     }
 
     @Override

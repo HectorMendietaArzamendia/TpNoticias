@@ -3,4 +3,9 @@
     <string name="title">Noticias</string>
     <string name="setup">Configuración</string>
     <string name="msg_dialog">Seleccione sus portales de interés</string>
+    <string name="telam">http://www.telam.com.ar/rss2/ultimasnoticias.xml</string>
+    <string name="perfil">https://www.perfil.com/rss/ultimo-momento</string>
+    <string name="pagina12">https://www.pagina12.com.ar/rss/portada</string>
+    <string name="clarin">https://www.clarin.com/rss/lo-ultimo/</string>
+    <string name="cronica">https://cronicaglobal.elespanol.com/es/rss/general-001.xml</string>
 </resources>
