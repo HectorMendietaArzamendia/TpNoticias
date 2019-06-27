@@ -29,7 +29,7 @@ public class XmlParser {
                         if (noticia != null) noticia.setTitulo(parser.nextText());
                     }
                     if ("description".equals(tagName)){
-                        if (noticia != null) noticia.setDescripcion(parser.nextText());
+                        if (noticia != null) noticia.setDescripcion(parser.nextText().replace("| ", ""));
                     }
                     if ("link".equals(tagName)){
                         String link = parser.nextText();

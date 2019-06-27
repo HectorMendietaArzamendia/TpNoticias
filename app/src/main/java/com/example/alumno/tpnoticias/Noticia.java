@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import java.util.Date;
 
 public class Noticia implements Comparable<Noticia> {
-    private Date fecha;
+    private Date fecha = new Date();
     private String titulo;
     private String descripcion;
     private String link;
@@ -38,8 +38,6 @@ public class Noticia implements Comparable<Noticia> {
 
     @Override
     public int compareTo(@NonNull Noticia noticia) {
-        int res = -1;
-        if (noticia.getFecha() != null && fecha != null) { res = res * fecha.compareTo(noticia.getFecha()); }
-        return res;
+        return fecha.compareTo(noticia.getFecha()) * -1;
     }
 }

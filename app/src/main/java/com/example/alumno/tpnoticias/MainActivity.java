@@ -70,7 +70,12 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
     @Override
     public boolean handleMessage(Message msg) {
         if (msg.arg1 == NOTICIAS) {
-            noticias.addAll((LinkedList) msg.obj);
+            for (Noticia n : (LinkedList<Noticia>) msg.obj){
+                String link = n.getLink();
+                if (!link.contains("undefined")){
+                    noticias.add(n);
+                }
+            }
             Collections.sort(noticias);
             adapter.notifyDataSetChanged();
         } else if (msg.arg1 == IMAGEN) {
