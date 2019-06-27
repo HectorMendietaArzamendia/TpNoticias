@@ -38,6 +38,8 @@ public class Noticia implements Comparable<Noticia> {
 
     @Override
     public int compareTo(@NonNull Noticia noticia) {
-        return this.fecha.compareTo(noticia.getFecha()) * -1;
+        int res = -1;
+        if (noticia.getFecha() != null && fecha != null) { res = res * fecha.compareTo(noticia.getFecha()); }
+        return res;
     }
 }
