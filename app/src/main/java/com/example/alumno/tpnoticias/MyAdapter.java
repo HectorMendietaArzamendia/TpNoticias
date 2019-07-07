@@ -37,23 +37,23 @@ public class MyAdapter extends RecyclerView.Adapter <MyViewHolder>{
         holder.tvFecha.setText(dateFormat.format(noticia.getFecha()));
 
         String titulo = noticia.getTitulo();
-        if (titulo.length() > 45){
-            holder.tvTitulo.setText(titulo.substring(0, 45).concat("..."));
+        if (titulo.length() > 50){
+            holder.tvTitulo.setText(titulo.substring(0, 50).concat("..."));
         }
         else { holder.tvTitulo.setText(titulo); }
 
         String descripcion = noticia.getDescripcion();
         if (descripcion != null){
-            if (descripcion.length() > 45){
-                holder.tvDescripcion.setText(descripcion.substring(0, 45).concat("..."));
+            if (descripcion.length() > 50){
+                holder.tvDescripcion.setText(descripcion.substring(0, 50).concat("..."));
             }
             else { holder.tvDescripcion.setText(descripcion); }
         }
 
         String link = noticia.getLink();
         if (link != null){
-            if (link.length() > 45){
-                holder.tvLink.setText(link.substring(0, 45).concat("..."));
+            if (link.length() > 50){
+                holder.tvLink.setText(link.substring(0, 50).concat("..."));
             }
             else { holder.tvLink.setText(link); }
         }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TpNoticias</string>
+    <string name="app_name">Noticias</string>
     <string name="title">Noticias</string>
     <string name="setup">Configuración</string>
     <string name="msg_dialog">Seleccione sus portales de interés</string>

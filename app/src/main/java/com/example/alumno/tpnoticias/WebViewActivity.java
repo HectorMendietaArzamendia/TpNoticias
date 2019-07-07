@@ -40,9 +40,6 @@ public class WebViewActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
                 myIntent.putExtra(Intent.EXTRA_TEXT,url);
-                String shareBody ="body";
-                String shareSub = "sub";
-                //  startActivity(Intent.createChooser(myIntent),"Compartir Usando");
                 startActivity(myIntent);
             }
         });
